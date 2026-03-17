@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="empApp">
+
+<head>
+
+<title>Employee Data</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+</head>
+
+<body ng-controller="empController">
+
+<h2>Employee Details</h2>
+
+<button ng-click="loadData()">Load Employees</button>
+
+<table ng-if="employees.length > 0">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Department</th>
+<th>Salary</th>
+</tr>
+
+<tr ng-repeat="emp in employees">
+<td>{{emp.id}}</td>
+<td>{{emp.name}}</td>
+<td>{{emp.department}}</td>
+<td>{{emp.salary}}</td>
+</tr>
+
+</table>
+
+<script>
+
+var app = angular.module("empApp",[]);
+
+app.controller("empController",function($scope,$http){
+
+$scope.employees=[];
+
+$scope.loadData=function(){
+
+$http.get("employees.json")
+.then(function(response){
+$scope.employees=response.data;
+})
+.catch(function(){
+alert("Error loading data");
+});
+
+};
+
+});
+
+</script>
+
+</body>
+</html>

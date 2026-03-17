@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="jobApp">
+
+<head>
+
+<title>Job Registration Form</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+</head>
+
+<body ng-controller="jobController">
+
+<div class="container">
+
+<h2>Job Registration Form</h2>
+
+<form name="jobForm" ng-submit="submitForm()" novalidate>
+
+<input type="text" name="fullname" placeholder="Full Name" ng-model="user.fullname" required>
+
+<input type="email" name="email" placeholder="Email" ng-model="user.email" required>
+
+<input type="text" name="mobile" placeholder="Mobile Number" ng-model="user.mobile" ng-pattern="/^[0-9]{10}$/" required>
+
+<select name="qualification" ng-model="user.qualification" required>
+<option value="">Select Qualification</option>
+<option>B.Tech</option>
+<option>M.Tech</option>
+<option>B.Sc</option>
+<option>MBA</option>
+</select>
+
+<input type="password" name="password" placeholder="Password" ng-model="user.password" ng-minlength="6" required>
+
+<button type="submit">Register</button>
+
+</form>
+
+<p class="success" ng-show="successMessage">
+{{ successMessage }}
+</p>
+
+</div>
+
+<script>
+
+var app = angular.module("jobApp",[]);
+
+app.controller("jobController",function($scope){
+
+$scope.submitForm=function(){
+
+ if($scope.jobForm.$valid){
+  $scope.successMessage="Registration Successful!";
+ }
+
+};
+
+});
+
+</script>
+
+</body>
+</html>
